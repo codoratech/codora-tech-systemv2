@@ -1,0 +1,857 @@
+/*
+ * codora-theme.css
+ * Codora Tech — brand theme layer for the Sneat admin dashboard.
+ * Loaded AFTER core.css / theme-default.css / demo.css so it can safely
+ * override component defaults without touching the compiled vendor files.
+ * ---------------------------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root {
+  --codora-primary: #420f74;
+  --codora-primary-rgb: 66, 15, 116;
+  --codora-primary-dark: #2c0a4e;
+  --codora-primary-light: #6f2ba8;
+  --codora-accent: #fb8500;
+  --codora-accent-rgb: 251, 133, 0;
+  --codora-accent-dark: #d97200;
+  --codora-radius-sm: 10px;
+  --codora-radius: 14px;
+  --codora-radius-lg: 16px;
+  --codora-shadow: 0 0.25rem 1rem rgba(66, 15, 116, 0.08);
+  --codora-shadow-hover: 0 0.5rem 1.5rem rgba(66, 15, 116, 0.14);
+
+  /* Light theme surface tokens */
+  --codora-bg: #f5f3f9;
+  --codora-surface: #ffffff;
+  --codora-surface-muted: #f7f4fb;
+  --codora-text: #2b2140;
+  --codora-text-muted: #6c6580;
+  --codora-border: #ebe6f3;
+}
+
+/* Dark theme surface tokens — activated on <html class="dark-style"> */
+html.dark-style {
+  --codora-bg: #16121f;
+  --codora-surface: #1e1830;
+  --codora-surface-muted: #241c39;
+  --codora-text: #ede9f7;
+  --codora-text-muted: #a79fc0;
+  --codora-border: #322a47;
+  --codora-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.35);
+  --codora-shadow-hover: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.45);
+}
+
+/* -------------------------------------------------------------------- */
+/* Typography                                                            */
+/* -------------------------------------------------------------------- */
+body,
+.menu-inner,
+.navbar,
+h1, h2, h3, h4, h5, h6,
+.card-title {
+  font-family: 'Inter', 'Public Sans', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6, .card-title {
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+/* -------------------------------------------------------------------- */
+/* Global surfaces (dark-mode aware)                                     */
+/* -------------------------------------------------------------------- */
+html.dark-style body {
+  background-color: var(--codora-bg);
+  color: var(--codora-text);
+}
+
+html.dark-style .layout-page,
+html.dark-style .content-wrapper {
+  background-color: var(--codora-bg);
+}
+
+html.dark-style .card,
+html.dark-style .dropdown-menu,
+html.dark-style .modal-content,
+html.dark-style .offcanvas {
+  background-color: var(--codora-surface);
+  color: var(--codora-text);
+  border-color: var(--codora-border);
+}
+
+html.dark-style .card-header,
+html.dark-style .row-bordered > * {
+  border-color: var(--codora-border) !important;
+}
+
+html.dark-style .text-muted,
+html.dark-style small.text-muted {
+  color: var(--codora-text-muted) !important;
+}
+
+html.dark-style .layout-navbar,
+html.dark-style .bg-navbar-theme {
+  background-color: var(--codora-surface) !important;
+  box-shadow: 0 1px 0 var(--codora-border);
+}
+
+html.dark-style .layout-menu,
+html.dark-style .bg-menu-theme {
+  background-color: var(--codora-surface) !important;
+}
+
+html.dark-style .menu-inner-shadow {
+  background: linear-gradient(var(--codora-surface) 41%, rgba(30, 24, 48, 0.11) 95%, rgba(30, 24, 48, 0));
+}
+
+html.dark-style .footer.bg-footer-theme {
+  background-color: var(--codora-surface) !important;
+  color: var(--codora-text-muted);
+  border-top: 1px solid var(--codora-border);
+}
+
+html.dark-style .table,
+html.dark-style .table > :not(caption) > * > * {
+  color: var(--codora-text);
+  background-color: transparent;
+}
+
+html.dark-style .table-hover > tbody > tr:hover > * {
+  background-color: var(--codora-surface-muted);
+}
+
+html.dark-style .form-control,
+html.dark-style .form-select,
+html.dark-style .input-group-text {
+  background-color: var(--codora-surface-muted);
+  border-color: var(--codora-border);
+  color: var(--codora-text);
+}
+
+html.dark-style .form-control:focus {
+  background-color: var(--codora-surface-muted);
+  color: var(--codora-text);
+}
+
+html.dark-style ::placeholder {
+  color: var(--codora-text-muted);
+  opacity: 1;
+}
+
+html.dark-style .dropdown-item {
+  color: var(--codora-text);
+}
+
+html.dark-style .dropdown-item:hover,
+html.dark-style .dropdown-item:focus {
+  background-color: var(--codora-surface-muted);
+  color: var(--codora-text);
+}
+
+html.dark-style .dropdown-divider,
+html.dark-style hr {
+  border-color: var(--codora-border);
+}
+
+html.dark-style ::-webkit-scrollbar-thumb {
+  background-color: var(--codora-border);
+}
+
+/* -------------------------------------------------------------------- */
+/* Rounded, soft-shadow "premium SaaS" component language                */
+/* -------------------------------------------------------------------- */
+.card {
+  border-radius: var(--codora-radius);
+  border: 1px solid var(--codora-border);
+  box-shadow: var(--codora-shadow);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--codora-shadow-hover);
+}
+
+.btn {
+  border-radius: var(--codora-radius-sm);
+  font-weight: 600;
+}
+
+.btn-primary {
+  box-shadow: 0 0.15rem 0.5rem rgba(var(--codora-primary-rgb), 0.35);
+}
+
+.form-control,
+.form-select,
+.input-group-text {
+  border-radius: var(--codora-radius-sm);
+}
+
+.dropdown-menu {
+  border-radius: var(--codora-radius);
+  border: 1px solid var(--codora-border);
+  box-shadow: var(--codora-shadow-hover);
+}
+
+.badge,
+.avatar-initial {
+  border-radius: var(--codora-radius-sm);
+}
+
+.badge.rounded-pill {
+  border-radius: 50rem;
+}
+
+.modal-content {
+  border-radius: var(--codora-radius-lg);
+}
+
+/* -------------------------------------------------------------------- */
+/* Accent (#FB8500) utility classes — used sparingly for CTAs / emphasis */
+/* -------------------------------------------------------------------- */
+.text-accent { color: var(--codora-accent) !important; }
+.bg-accent { background-color: var(--codora-accent) !important; }
+.bg-label-accent {
+  background-color: rgba(var(--codora-accent-rgb), 0.16) !important;
+  color: var(--codora-accent-dark) !important;
+}
+html.dark-style .bg-label-accent {
+  color: #ffb15c !important;
+}
+
+.btn-accent {
+  background-color: var(--codora-accent);
+  border-color: var(--codora-accent);
+  color: #fff;
+  box-shadow: 0 0.2rem 0.55rem rgba(var(--codora-accent-rgb), 0.28);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: var(--codora-accent-dark);
+  border-color: var(--codora-accent-dark);
+  color: #fff;
+  box-shadow: 0 0.35rem 0.85rem rgba(var(--codora-accent-rgb), 0.4);
+  transform: translateY(-1px);
+}
+.btn-accent:active {
+  transform: translateY(0);
+  box-shadow: 0 0.15rem 0.4rem rgba(var(--codora-accent-rgb), 0.3);
+}
+
+.btn-outline-accent {
+  color: var(--codora-accent-dark);
+  border-color: var(--codora-accent);
+  background-color: transparent;
+}
+.btn-outline-accent:hover,
+.btn-outline-accent:focus {
+  background-color: var(--codora-accent);
+  border-color: var(--codora-accent);
+  color: #fff;
+}
+html.dark-style .btn-outline-accent {
+  color: #ffb15c;
+}
+
+/* Small icon-only row action buttons (table actions) */
+.btn-icon.btn-sm.rounded-circle {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+.btn-icon.btn-sm.rounded-circle:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0.35rem 0.7rem rgba(var(--codora-primary-rgb), 0.18);
+}
+/* -------------------------------------------------------------------- */
+/* Brand mark in sidebar                                                 */
+/* -------------------------------------------------------------------- */
+.codora-brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--codora-primary) 0%, var(--codora-primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.app-brand-text.codora {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* -------------------------------------------------------------------- */
+/* Topbar: language selector + theme switcher                            */
+/* -------------------------------------------------------------------- */
+.codora-lang-switch .btn,
+.codora-theme-switch {
+  border-radius: var(--codora-radius-sm);
+}
+
+.codora-lang-switch .dropdown-item.active,
+.codora-lang-switch .dropdown-item:active {
+  background-color: rgba(var(--codora-primary-rgb), 0.1);
+  color: var(--codora-primary);
+}
+
+html.dark-style .codora-lang-switch .dropdown-item.active {
+  color: #c9a3e8;
+}
+
+.codora-theme-switch i {
+  font-size: 1.375rem;
+  vertical-align: middle;
+}
+
+/* -------------------------------------------------------------------- */
+/* KPI cards                                                             */
+/* -------------------------------------------------------------------- */
+.codora-kpi-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--codora-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+
+/* -------------------------------------------------------------------- */
+/* Activity timeline                                                     */
+/* -------------------------------------------------------------------- */
+.codora-timeline {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.codora-timeline-item {
+  position: relative;
+  padding-left: 2.25rem;
+  padding-bottom: 1.5rem;
+}
+
+.codora-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.codora-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 1.6rem;
+  bottom: -0.1rem;
+  width: 2px;
+  background-color: var(--codora-border);
+}
+
+.codora-timeline-item:last-child::before {
+  display: none;
+}
+
+.codora-timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: #fff;
+}
+
+/* -------------------------------------------------------------------- */
+/* Hero — business overview banner (Phase 1.6: light, elegant surface)   */
+/* -------------------------------------------------------------------- */
+.codora-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--codora-radius-lg);
+  background: linear-gradient(155deg, var(--codora-surface) 0%, var(--codora-surface-muted) 100%);
+  border: 1px solid var(--codora-border);
+  box-shadow: var(--codora-shadow);
+  isolation: isolate;
+}
+
+.codora-hero:hover {
+  transform: none;
+  box-shadow: var(--codora-shadow);
+}
+
+/* Decorative layer: blurred gradient circles + a whisper of dot-grid texture */
+.codora-hero::before,
+.codora-hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.codora-hero::before {
+  width: 420px;
+  height: 420px;
+  right: -160px;
+  top: -190px;
+  background: radial-gradient(circle at 35% 35%, rgba(var(--codora-primary-rgb), 0.14), transparent 68%);
+}
+
+.codora-hero::after {
+  width: 260px;
+  height: 260px;
+  left: 8%;
+  bottom: -170px;
+  background: radial-gradient(circle at 50% 50%, rgba(var(--codora-accent-rgb), 0.10), transparent 70%);
+}
+
+.codora-hero-dotgrid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(var(--codora-primary-rgb), 0.16) 1px, transparent 1px);
+  background-size: 18px 18px;
+  -webkit-mask-image: linear-gradient(120deg, black, transparent 55%);
+  mask-image: linear-gradient(120deg, black, transparent 55%);
+  opacity: 0.6;
+}
+
+html.dark-style .codora-hero-dotgrid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+}
+
+.codora-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.codora-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(var(--codora-primary-rgb), 0.09);
+  color: var(--codora-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 50rem;
+}
+
+html.dark-style .codora-hero-eyebrow {
+  background: rgba(var(--codora-primary-rgb), 0.22);
+  color: #c9a3e8;
+}
+
+.codora-hero h3 {
+  color: var(--codora-text);
+  letter-spacing: -0.02em;
+}
+
+.codora-hero p {
+  color: var(--codora-text-muted);
+  max-width: 32rem;
+}
+
+.codora-hero-stats {
+  position: relative;
+  z-index: 1;
+}
+
+.codora-hero-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--codora-surface);
+  border: 1px solid var(--codora-border);
+  border-radius: var(--codora-radius);
+  padding: 0.9rem 1rem;
+  height: 100%;
+  box-shadow: 0 0.1rem 0.4rem rgba(var(--codora-primary-rgb), 0.05);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.codora-hero-stat:hover {
+  box-shadow: 0 0.5rem 1.1rem rgba(var(--codora-primary-rgb), 0.14);
+  border-color: rgba(var(--codora-primary-rgb), 0.3);
+  transform: translateY(-2px);
+}
+
+.codora-hero-stat-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex !important;
+  align-items: center !important;     /* Centraliza verticalmente */
+  justify-content: center !important;  /* Centraliza horizontalmente */
+  flex-shrink: 0;
+  background: rgba(var(--codora-primary-rgb), 0.1);
+  color: var(--codora-primary);
+  font-size: 1.15rem;
+}
+
+/* Força a tag de ícone/imagem interna a resetar margens e alinhamentos padrão */
+.codora-hero-stat-icon i,
+.codora-hero-stat-icon img {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+.codora-hero-stat strong {
+  display: block;
+  color: var(--codora-text);
+  font-size: 1.1rem;      /* Reduzido levemente de 1.15rem para 1.1rem para caber melhor */
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;    /* Impede que o R$ quebre linha do 18,4k */
+}
+
+.codora-hero-stat span {
+  display: block;
+  color: var(--codora-text-muted);
+  font-size: 0.75rem;
+  margin-top: 0.15rem;
+}
+
+/* -------------------------------------------------------------------- */
+/* KPI cards — premium redesign                                          */
+/* -------------------------------------------------------------------- */
+.codora-kpi-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.codora-kpi-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120px 120px at calc(100% + 20px) -20px, var(--codora-kpi-tint, rgba(var(--codora-primary-rgb), 0.14)), transparent 70%);
+  pointer-events: none;
+}
+
+.codora-kpi-card .card-body {
+  position: relative;
+  z-index: 1;
+}
+
+.codora-kpi-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.codora-kpi-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.codora-kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 700;
+}
+
+.codora-kpi-icon {
+  background: linear-gradient(135deg, var(--codora-kpi-color-a, var(--codora-primary)), var(--codora-kpi-color-b, var(--codora-primary-light)));
+  color: #fff;
+  box-shadow: 0 0.35rem 0.85rem -0.2rem var(--codora-kpi-color-a, rgba(var(--codora-primary-rgb), 0.55));
+}
+
+.codora-kpi-card--primary { --codora-kpi-color-a: var(--codora-primary); --codora-kpi-color-b: #6f2ba8; --codora-kpi-tint: rgba(var(--codora-primary-rgb), 0.14); }
+.codora-kpi-card--accent { --codora-kpi-color-a: var(--codora-accent); --codora-kpi-color-b: #ffb347; --codora-kpi-tint: rgba(var(--codora-accent-rgb), 0.16); }
+.codora-kpi-card--success { --codora-kpi-color-a: #23c26a; --codora-kpi-color-b: #71dd37; --codora-kpi-tint: rgba(35, 194, 106, 0.14); }
+.codora-kpi-card--warning { --codora-kpi-color-a: #e08900; --codora-kpi-color-b: #ffab00; --codora-kpi-tint: rgba(224, 137, 0, 0.16); }
+
+/* -------------------------------------------------------------------- */
+/* Chart card headers                                                    */
+/* -------------------------------------------------------------------- */
+.codora-chart-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.codora-chart-title-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.codora-section-title {
+  font-size: 1.05rem;
+}
+.codora-empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--codora-text-muted);
+}
+
+.codora-empty-state i {
+  font-size: 2.25rem;
+  color: rgba(var(--codora-primary-rgb), 0.35);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* -------------------------------------------------------------------- */
+/* Subtle branded details                                                */
+/* -------------------------------------------------------------------- */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(var(--codora-primary-rgb), 0.35);
+  border-radius: 50rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(var(--codora-primary-rgb), 0.55);
+}
+
+.card-header {
+  position: relative;
+}
+
+.codora-brand-mark {
+  position: relative;
+}
+
+.codora-brand-mark::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(var(--codora-accent-rgb), 0.55);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.app-brand-link:hover .codora-brand-mark::after {
+  opacity: 1;
+}
+/* -------------------------------------------------------------------- */
+/* Accessibility: visible focus states                                   */
+/* -------------------------------------------------------------------- */
+a:focus-visible,
+button:focus-visible,
+.menu-link:focus-visible,
+.form-control:focus-visible {
+  outline: 2px solid var(--codora-accent);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------- */
+/* Sidebar — spacing, hover and active state polish                      */
+/* -------------------------------------------------------------------- */
+.menu-inner .menu-item .menu-link {
+  border-radius: var(--codora-radius-sm);
+  margin-inline: 0.5rem;
+  padding-block: 0.6rem;
+  position: relative;
+  transition: background-color 0.18s ease, color 0.18s ease, padding-left 0.18s ease;
+}
+
+.menu-inner .menu-item .menu-link:hover {
+  background-color: rgba(var(--codora-primary-rgb), 0.08);
+  padding-left: 1.35rem;
+}
+
+html.dark-style .menu-inner .menu-item .menu-link:hover {
+  background-color: rgba(var(--codora-primary-rgb), 0.22);
+}
+
+.menu-inner .menu-item.active > .menu-link {
+  position: relative;
+}
+
+.menu-inner .menu-item.active > .menu-link::before {
+  content: '';
+  position: absolute;
+  left: -0.5rem;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background-color: var(--codora-accent);
+}
+
+.menu-header-text {
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  opacity: 0.65;
+}
+
+/* -------------------------------------------------------------------- */
+/* Micro-interactions: cards, buttons, dropdowns, theme switch            */
+/* -------------------------------------------------------------------- */
+.card {
+  transform: translateZ(0);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.dropdown-menu {
+  animation: codora-dropdown-in 0.16s ease-out;
+  transform-origin: top center;
+}
+
+@keyframes codora-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.codora-theme-switch i {
+  transition: transform 0.35s ease;
+}
+
+.codora-theme-switch:hover i {
+  transform: rotate(20deg);
+}
+
+.avatar-initial,
+.codora-kpi-icon {
+  transition: transform 0.18s ease;
+}
+
+.card:hover .codora-kpi-icon {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .btn,
+  .dropdown-menu,
+  .codora-theme-switch i,
+  .avatar-initial,
+  .codora-kpi-icon,
+  .menu-inner .menu-item .menu-link {
+    transition: none !important;
+    animation: none !important;
+  }
+  .card:hover {
+    transform: none;
+  }
+}
+
+/* -------------------------------------------------------------------- */
+/* Standardized components: alerts, pagination, breadcrumbs, tooltips     */
+/* -------------------------------------------------------------------- */
+.alert {
+  border-radius: var(--codora-radius-sm);
+  border: 1px solid transparent;
+}
+
+.alert-primary {
+  background-color: rgba(var(--codora-primary-rgb), 0.1);
+  color: var(--codora-primary-dark);
+}
+
+html.dark-style .alert-primary {
+  color: #c9a3e8;
+  background-color: rgba(var(--codora-primary-rgb), 0.24);
+}
+
+.page-link {
+  border-radius: var(--codora-radius-sm);
+  margin-inline: 2px;
+  color: var(--codora-text);
+  border-color: var(--codora-border);
+}
+
+.page-item.active .page-link {
+  background-color: var(--codora-primary);
+  border-color: var(--codora-primary);
+}
+
+html.dark-style .page-link {
+  background-color: var(--codora-surface-muted);
+  color: var(--codora-text);
+  border-color: var(--codora-border);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  color: var(--codora-text-muted);
+}
+
+.breadcrumb-item.active {
+  color: var(--codora-text-muted);
+}
+
+.tooltip .tooltip-inner {
+  border-radius: var(--codora-radius-sm);
+  background-color: var(--codora-text);
+  font-weight: 500;
+}
+
+html.dark-style .tooltip .tooltip-inner {
+  background-color: var(--codora-surface-muted);
+  color: var(--codora-text);
+}
+
+/* -------------------------------------------------------------------- */
+/* Loading state — skeleton placeholder                                  */
+/* -------------------------------------------------------------------- */
+.codora-skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--codora-surface-muted);
+  border-radius: var(--codora-radius-sm);
+}
+
+.codora-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(var(--codora-primary-rgb), 0.08), transparent);
+  animation: codora-skeleton-sweep 1.4s infinite;
+}
+
+@keyframes codora-skeleton-sweep {
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .codora-skeleton::after {
+    animation: none;
+  }
+}
