@@ -1,49 +1,137 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const { SourceMapDevToolPlugin } = require("webpack");
 const path = require('path');
+const glob = require('glob');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = {
-  entry: {
-    app: path.resolve(__dirname, 'src/index.js')
-  },
+// -------------------------------------------------------------------------------
+// Config
+
+const conf = (() => {
+  const _conf = require('./build-config');
+  return require('deepmerge').all([{}, _conf.base || {}, _conf[process.env.NODE_ENV] || {}]);
+})();
+
+conf.distPath = path.resolve(__dirname, conf.distPath);
+
+// -------------------------------------------------------------------------------
+// NPM packages to transpile
+
+const TRANSPILE_PACKAGES = ['bootstrap', 'popper.js', 'shepherd.js'];
+
+const packageRegex = package => `(?:\\\\|\\/)${package}(?:\\\\|\\/).+?\\.js$`;
+
+// -------------------------------------------------------------------------------
+// Build config
+
+const collectEntries = () => {
+  const fileList = glob.sync(`!(${conf.exclude.join('|')})/**/!(_)*.@(js|es6)`) || [];
+  const fileListFiltered = fileList.filter(str => !str.includes('formvalidation'));
+  return fileListFiltered.reduce((entries, file) => {
+    const filePath = file.replace(/\\/g, '/');
+    return { ...entries, [filePath.replace(/\.(?:js|es6)$/, '')]: `./${filePath}` };
+  }, {});
+};
+
+const babelLoader = () => ({
+  loader: 'babel-loader',
+  options: {
+    presets: [['@babel/preset-env', { targets: 'last 2 versions, ie >= 10' }]],
+    plugins: [
+      '@babel/plugin-transform-destructuring',
+      '@babel/plugin-proposal-object-rest-spread',
+      '@babel/plugin-transform-template-literals'
+    ],
+    babelrc: false
+  }
+});
+
+const webpackConfig = {
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  entry: collectEntries(),
+
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'static/'),
+    path: conf.distPath,
+    filename: '[name].js',
+    libraryTarget: 'window'
   },
   module: {
     rules: [
       {
+        // Transpile sources
+        test: /\.es6$|\.js$/,
+        exclude: [path.resolve(__dirname, 'node_modules')],
+        use: [babelLoader()]
+      },
+      {
+        // Transpile required packages
+        test: new RegExp(`(?:${TRANSPILE_PACKAGES.map(packageRegex).join(')|(?:')})`),
+        include: [path.resolve(__dirname, 'node_modules')],
+        use: [babelLoader()]
+      },
+      {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          outputPath: 'static/images/'
-        }
+        test: /\.scss$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }]
       },
       {
-        test: /\.(ttf|eot|svg|gif|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [{
-          loader: 'file-loader',
-        }]
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.css']
-  },
-  plugins: [
-    new MiniCssExtractPlugin(),
-    new SourceMapDevToolPlugin({
-      filename: "[file].map"
-    })
-  ],
-  optimization: {
-    minimizer: [
-      new CssMinimizerPlugin()
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: { minimize: true }
+          }
+        ]
+      }
     ]
   },
+  plugins: [],
+  resolve: {
+    extensions: ['.js'],
+    alias: {
+      formvalidation: path.resolve(__dirname, 'libs/formvalidation/dist/es6')
+    }
+  },
+
+  externals: {
+    jquery: 'jQuery',
+    moment: 'moment',
+    'datatables.net': '$.fn.dataTable',
+    jsdom: 'jsdom',
+    velocity: 'Velocity',
+    hammer: 'Hammer',
+    pace: '"pace-progress"',
+    chartist: 'Chartist',
+    'popper.js': 'Popper',
+
+    // blueimp-gallery plugin
+    './blueimp-helper': 'jQuery',
+    './blueimp-gallery': 'blueimpGallery',
+    './blueimp-gallery-video': 'blueimpGallery'
+  }
 };
+
+// -------------------------------------------------------------------------------
+// Sourcemaps
+if (conf.sourcemaps) {
+  webpackConfig.devtool = conf.devtool;
+}
+
+// -------------------------------------------------------------------------------
+// Minify
+
+// Minifies sources by default in production mode
+if (process.env.NODE_ENV !== 'production' && conf.minify) {
+  webpackConfig.plugins.push(
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        warnings: false
+      },
+      sourceMap: conf.sourcemaps,
+      parallel: true
+    })
+  );
+}
+
+module.exports = webpackConfig;

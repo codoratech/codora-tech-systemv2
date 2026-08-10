@@ -1,71 +1,110 @@
 {
-  "name": "flowbite-admin-dashboard",
-  "version": "2.0.0",
-  "description": "A free and open-source admin dashboard template built with Tailwind CSS and Flowbite",
-  "keywords": [
-    "tailwind",
-    "tailwind css",
-    "flowbite",
-    "admin dashboard",
-    "dashboard ui",
-    "admin dashboard template",
-    "html",
-    "css",
-    "javascript"
-  ],
+  "name": "sneat-bootstrap-html-admin-template-free",
+  "description": "Most Powerful & Comprehensive Free Bootstrap 5 HTML Admin Dashboard Template built for developers! 🚀",
   "license": "MIT",
-  "style": "dist/flowbite.css",
-  "main": "static/js/app.bundle.js",
-  "homepage": "https://flowbite.com",
-  "repository": "https://github.com/themesberg/flowbite-admin-dashboard.git",
-  "bugs": "https://github.com/themesberg/flowbite-admin-dashboard/issues",
-  "contributors": [
-    "Zoltán Szőgyényi <https://twitter.com/zoltanszogyenyi>",
-    "Robert Tanislav <https://twitter.com/roberttanislav>"
-  ],
-  "author": "Bergside Inc.",
-  "scripts": {
-    "start": "run-p start:dev:*",
-    "start:dev:hugo": "hugo server -D --watch",
-    "start:dev:webpack": "webpack --mode=development --watch",
-    "build": "NODE_ENV=production && run-s build:webpack build:hugo",
-    "build:hugo": "hugo --destination=./public",
-    "build:webpack": "webpack --mode=production",
-    "build:styles": "npx tailwindcss -i ./src/style.css -o ./dist/css/flowbite.css"
+  "version": "1.0.0",
+  "author": {
+    "name": "ThemeSelection",
+    "url": "https://themeselection.com/"
   },
-  "devDependencies": {
-    "archiver": "^5.3.0",
-    "autoprefixer": "^10.3.7",
-    "core-js": "^3.18.3",
-    "css-loader": "^6.4.0",
-    "css-minimizer-webpack-plugin": "^3.1.1",
-    "file-loader": "^6.2.0",
-    "fs-extra": "^10.0.0",
-    "javascript-obfuscator": "^2.19.0",
-    "js-yaml": "^4.1.0",
-    "jsdom": "^17.0.0",
-    "loader-utils": "^2.0.0",
-    "mini-css-extract-plugin": "^2.4.2",
-    "minimist": "^1.2.5",
-    "multi-stage-sourcemap": "^0.3.1",
-    "multimatch": "^5.0.0",
-    "npm-run-all": "^4.1.5",
-    "postcss": "^8.5.1",
-    "postcss-loader": "^6.2.0",
-    "postcss-preset-env": "^6.7.0",
-    "pretty-bytes": "^5.6.0",
-    "source-map-loader": "^3.0.0",
-    "style-loader": "^3.3.0",
-    "webpack": "^5.58.2",
-    "webpack-cli": "^4.9.0",
-    "webpack-dev-server": "^4.3.1",
-    "yarn": "^1.22.17"
+  "bugs": {
+    "url": "https://github.com/themeselection/sneat-html-admin-template-free/issues"
+  },
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themeselection/sneat-html-admin-template-free.git"
+  },
+  "homepage": "https://themeselection.com/products/sneat-free-bootstrap-html-admin-template/",
+  "keywords": [
+    "bootstrap",
+    "front-end",
+    "admin",
+    "framework",
+    "admin-dashboard",
+    "webapp",
+    "bootstrap5",
+    "themeselection",
+    "freebies"
+  ],
+  "scripts": {
+    "build": "npx gulp build",
+    "build:js": "npx gulp build:js",
+    "build:css": "npx gulp build:css",
+    "build:fonts": "npx gulp build:fonts",
+    "build:copy": "npx gulp build:copy",
+    "build:prod": "npx gulp build --env=production",
+    "build:prod:js": "npx gulp build:js --env=production",
+    "build:prod:css": "npx gulp build:css --env=production",
+    "build:prod:fonts": "npx gulp build:fonts --env=production",
+    "build:prod:copy": "npx gulp build:copy --env=production",
+    "watch": "npx gulp watch",
+    "serve": "npx gulp serve"
   },
   "dependencies": {
-    "@popperjs/core": "^2.10.2",
-    "@tailwindcss/postcss": "^4.0.0",
-    "apexcharts": "^3.46.0",
-    "flowbite": "^3.1.1",
-    "tailwindcss": "^4.0.0"
+    "@popperjs/core": "^2.9.2",
+    "apexcharts-clevision": "^3.28.3",
+    "bootstrap": "~5.1.3",
+    "boxicons": "~2.0.9",
+    "highlight.js": "~9.17.1",
+    "jquery": "~3.5.1",
+    "masonry-layout": "~4.2.1",
+    "perfect-scrollbar": "~1.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "~7.7.7",
+    "@babel/plugin-proposal-object-rest-spread": "~7.7.7",
+    "@babel/plugin-transform-destructuring": "~7.7.4",
+    "@babel/plugin-transform-template-literals": "~7.7.4",
+    "@babel/preset-env": "~7.7.7",
+    "ansi-colors": "~4.1.1",
+    "babel-loader": "~8.0.4",
+    "browser-sync": "^2.26.7",
+    "color-support": "~1.1.3",
+    "css-loader": "~3.4.0",
+    "deepmerge": "~4.2.2",
+    "del": "~5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "fancy-log": "~1.3.3",
+    "gulp": "~4.0.2",
+    "gulp-autoprefixer": "~7.0.1",
+    "gulp-environment": "~1.5.2",
+    "gulp-if": "~3.0.0",
+    "gulp-rename": "~2.0.0",
+    "gulp-replace": "~1.0.0",
+    "gulp-sourcemaps": "~2.6.4",
+    "gulp-useref": "^5.0.0",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-exec": "^5.0.0",
+    "html-loader": "~0.5.5",
+    "js-beautify": "^1.10.3",
+    "prettier": "^2.2.1",
+    "sass-loader": "~8.0.0",
+    "string-replace-webpack-plugin": "~0.1.3",
+    "style-loader": "~1.1.2",
+    "uglifyjs-webpack-plugin": "~2.2.0",
+    "webpack": "~4.41.0",
+    "yarn": "~1.21.1"
+  },
+  "gulp-environment": {
+    "environments": [
+      {
+        "name": "development",
+        "aliases": [
+          "dev"
+        ]
+      },
+      {
+        "name": "production",
+        "aliases": [
+          "prod"
+        ]
+      }
+    ],
+    "default": "development"
   }
 }
