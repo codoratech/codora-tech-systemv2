@@ -1,0 +1,87 @@
+# Codora Tech — Regras do Projeto
+
+## Base
+
+O sistema é baseado no template Bootstrap Admin Sneat.
+
+O template existente deve ser tratado como a base estrutural do projeto.
+
+Não substituir a arquitetura existente por React, Vue, Angular, Tailwind ou outro framework.
+
+## Design
+
+Fonte: Inter
+
+Roxo principal: #420F74
+Laranja principal: #FB8500
+
+Manter o sistema visual existente.
+
+Não criar um novo design system quando um componente existente puder ser reutilizado.
+
+## Desenvolvimento
+
+Preferir:
+
+- reutilizar HTML existente;
+- reutilizar componentes Bootstrap;
+- reutilizar classes CSS existentes;
+- reutilizar JavaScript existente;
+- criar o mínimo de código novo necessário.
+
+Evitar:
+
+- duplicação de código;
+- criação de componentes desnecessários;
+- alteração de páginas já aprovadas;
+- criação de novos estilos quando um estilo existente puder ser reutilizado.
+
+## Sistema
+
+O sistema representa uma solução de gestão desenvolvida pela Codora Tech.
+
+O banco de dados utilizado como referência pertence ao cliente e representa o domínio de negócio do cliente.
+
+Não confundir o banco do cliente com dados internos da Codora Tech.
+
+## Desenvolvimento incremental
+
+Antes de alterar uma página existente:
+
+1. analisar o código atual;
+2. identificar componentes reutilizáveis;
+3. verificar dependências;
+4. implementar a menor alteração possível;
+5. testar;
+6. verificar se outras páginas foram afetadas.
+
+## Regra importante
+
+Não modificar várias páginas simultaneamente sem necessidade.
+
+Cada módulo deve ser desenvolvido e validado individualmente.
+
+## DEVELOPMENT PRINCIPLES
+
+The Dashboard is based on the original Sneat Bootstrap Admin Template.
+
+The existing Sneat structure must be considered the foundation of the administrative system.
+
+When implementing new features:
+
+- Prefer existing HTML structures from the template.
+- Prefer existing Bootstrap components.
+- Prefer existing CSS classes.
+- Prefer existing JavaScript patterns.
+- Reuse existing components before creating new ones.
+- Only create new CSS or JavaScript when the existing template cannot reasonably support the requirement.
+
+Do not unnecessarily rewrite existing pages.
+
+Do not migrate the project to another frontend framework.
+
+Do not replace Bootstrap with Tailwind.
+
+Do not introduce React, Vue, Angular or similar frameworks.
+
+The objective is to customize and extend the existing template, not rebuild it from scratch.
