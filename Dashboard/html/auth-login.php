@@ -10,16 +10,16 @@ if (isset($_SESSION['usuario_id'])) {
 $erro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email'] ?? '');
+    $login = trim($_POST['login'] ?? $_POST['email'] ?? '');
     $senha = $_POST['password'] ?? '';
 
-    if (empty($email) || empty($senha)) {
-        $erro = 'Por favor, preencha o email e a senha.';
+    if (empty($login) || empty($senha)) {
+        $erro = 'Por favor, preencha o login e a senha.';
     } else {
         require_once '../config/conexao.php';
         try {
             $stmt = $pdo->prepare("SELECT id, nome, email, senha_hash, cargo FROM usuarios WHERE email = ?");
-            $stmt->execute([$email]);
+            $stmt->execute([$login]);
             $usuario = $stmt->fetch();
 
             if ($usuario && password_verify($senha, $usuario['senha_hash'])) {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: index.php');
                 exit;
             } else {
-                $erro = 'Credenciais inválidas. Verifique seu email e senha.';
+                $erro = 'Credenciais inválidas. Verifique seu login e senha.';
             }
         } catch (Exception $e) {
             $erro = 'Erro interno no sistema. Tente novamente mais tarde.';
@@ -121,14 +121,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
               <form id="formAuthentication" class="mb-3" action="auth-login.php" method="POST">
                 <div class="mb-3">
-                  <label for="email" class="form-label">E-mail</label>
+                  <label for="login" class="form-label">Login</label>
                   <input
-                    type="email"
+                    type="text"
                     class="form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Digite seu e-mail"
-                    value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"
+                    id="login"
+                    name="login"
+                    placeholder="Digite seu login"
+                    value="<?php echo isset($_POST['login']) ? htmlspecialchars($_POST['login']) : (isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''); ?>"
                     autofocus
                     required
                   />

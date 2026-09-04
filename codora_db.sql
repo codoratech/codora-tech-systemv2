@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
-  senha_hash VARCHAR(255) NOT NULL,
+  senha VARCHAR(255) NOT NULL,
   cargo VARCHAR(50) DEFAULT 'Administrador',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -138,3 +138,6 @@ INSERT INTO ordens_servico (numero_ordem, cliente_id, servico_id, projeto_id, re
 INSERT INTO agenda (titulo, tipo, cliente_id, projeto_id, responsavel, data_compromisso, hora_compromisso, status, descricao) VALUES
 ('Reunião de kickoff', 'Reunião com cliente', 2, 2, 'Rafael Mendes', '2025-03-02', '14:30:00', 'Agendado', 'Alinhamento inicial de escopo com a Construtora Vega.'),
 ('Entrega — Sprint 4', 'Prazo de projeto', 1, 1, 'Ana Souza', '2025-03-15', '18:00:00', 'Agendado', 'Validação das telas do portal financeiro.');
+
+INSERT INTO usuarios (nome, email, senha, cargo) 
+VALUES ('Adm', 'admin@codoratech.com.br', '123', 'Administrador');
