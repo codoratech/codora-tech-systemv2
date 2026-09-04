@@ -13,31 +13,31 @@ if (!isset($_SESSION['usuario_id'])) {
     header('Location: auth-login.php');
     exit;
 }
-$nomeUsuario = $_SESSION['usuario_nome'] ?? 'Administrador';
-$cargoUsuario = $_SESSION['usuario_cargo'] ?? 'Administrador';
+$nomeUsuario = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : 'Administrador';
+$cargoUsuario = isset($_SESSION['usuario_cargo']) ? $_SESSION['usuario_cargo'] : 'Administrador';
 
 require_once '../config/conexao.php';
 
 // Tratamento de requisições AJAX (CRUD)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
-    $action = $_POST['action'] ?? '';
+    $action = isset($_POST['action']) ? $_POST['action'] : '';
 
     try {
         if ($action === 'create') {
-            $empresa = trim($_POST['empresa'] ?? '');
-            $responsavel = trim($_POST['responsavel'] ?? '');
-            $documento = trim($_POST['documento'] ?? '');
-            $telefone = trim($_POST['telefone'] ?? '');
-            $email = trim($_POST['email'] ?? '');
-            $cidade = trim($_POST['cidade'] ?? '');
-            $estado = trim($_POST['estado'] ?? '');
-            $cep = trim($_POST['cep'] ?? '');
-            $endereco = trim($_POST['endereco'] ?? '');
-            $numero = trim($_POST['numero'] ?? '');
-            $bairro = trim($_POST['bairro'] ?? '');
-            $status = trim($_POST['status'] ?? 'Ativo');
-            $observacoes = trim($_POST['observacoes'] ?? '');
+            $empresa = trim(isset($_POST['empresa']) ? $_POST['empresa'] : '');
+            $responsavel = trim(isset($_POST['responsavel']) ? $_POST['responsavel'] : '');
+            $documento = trim(isset($_POST['documento']) ? $_POST['documento'] : '');
+            $telefone = trim(isset($_POST['telefone']) ? $_POST['telefone'] : '');
+            $email = trim(isset($_POST['email']) ? $_POST['email'] : '');
+            $cidade = trim(isset($_POST['cidade']) ? $_POST['cidade'] : '');
+            $estado = trim(isset($_POST['estado']) ? $_POST['estado'] : '');
+            $cep = trim(isset($_POST['cep']) ? $_POST['cep'] : '');
+            $endereco = trim(isset($_POST['endereco']) ? $_POST['endereco'] : '');
+            $numero = trim(isset($_POST['numero']) ? $_POST['numero'] : '');
+            $bairro = trim(isset($_POST['bairro']) ? $_POST['bairro'] : '');
+            $status = trim(isset($_POST['status']) ? $_POST['status'] : 'Ativo');
+            $observacoes = trim(isset($_POST['observacoes']) ? $_POST['observacoes'] : '');
 
             if (empty($empresa) || empty($responsavel) || empty($documento) || empty($email)) {
                 echo json_encode(['success' => false, 'message' => 'Preencha os campos obrigatórios (Empresa, Responsável, Documento, E-mail).']);
@@ -50,20 +50,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => true, 'message' => 'Cliente cadastrado com sucesso!']);
             exit;
         } elseif ($action === 'update') {
-            $id = intval($_POST['id'] ?? 0);
-            $empresa = trim($_POST['empresa'] ?? '');
-            $responsavel = trim($_POST['responsavel'] ?? '');
-            $documento = trim($_POST['documento'] ?? '');
-            $telefone = trim($_POST['telefone'] ?? '');
-            $email = trim($_POST['email'] ?? '');
-            $cidade = trim($_POST['cidade'] ?? '');
-            $estado = trim($_POST['estado'] ?? '');
-            $cep = trim($_POST['cep'] ?? '');
-            $endereco = trim($_POST['endereco'] ?? '');
-            $numero = trim($_POST['numero'] ?? '');
-            $bairro = trim($_POST['bairro'] ?? '');
-            $status = trim($_POST['status'] ?? 'Ativo');
-            $observacoes = trim($_POST['observacoes'] ?? '');
+            $id = intval(isset($_POST['id']) ? $_POST['id'] : 0);
+            $empresa = trim(isset($_POST['empresa']) ? $_POST['empresa'] : '');
+            $responsavel = trim(isset($_POST['responsavel']) ? $_POST['responsavel'] : '');
+            $documento = trim(isset($_POST['documento']) ? $_POST['documento'] : '');
+            $telefone = trim(isset($_POST['telefone']) ? $_POST['telefone'] : '');
+            $email = trim(isset($_POST['email']) ? $_POST['email'] : '');
+            $cidade = trim(isset($_POST['cidade']) ? $_POST['cidade'] : '');
+            $estado = trim(isset($_POST['estado']) ? $_POST['estado'] : '');
+            $cep = trim(isset($_POST['cep']) ? $_POST['cep'] : '');
+            $endereco = trim(isset($_POST['endereco']) ? $_POST['endereco'] : '');
+            $numero = trim(isset($_POST['numero']) ? $_POST['numero'] : '');
+            $bairro = trim(isset($_POST['bairro']) ? $_POST['bairro'] : '');
+            $status = trim(isset($_POST['status']) ? $_POST['status'] : 'Ativo');
+            $observacoes = trim(isset($_POST['observacoes']) ? $_POST['observacoes'] : '');
 
             if ($id <= 0 || empty($empresa) || empty($responsavel)) {
                 echo json_encode(['success' => false, 'message' => 'ID inválido ou campos obrigatórios ausentes.']);
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => true, 'message' => 'Cliente atualizado com sucesso!']);
             exit;
         } elseif ($action === 'delete') {
-            $id = intval($_POST['id'] ?? 0);
+            $id = intval(isset($_POST['id']) ? $_POST['id'] : 0);
             if ($id <= 0) {
                 echo json_encode(['success' => false, 'message' => 'ID inválido.']);
                 exit;
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => true, 'message' => 'Cliente excluído com sucesso!']);
             exit;
         } elseif ($action === 'get') {
-            $id = intval($_POST['id'] ?? $_GET['id'] ?? 0);
+            $id = intval(isset($_POST['id']) ? $_POST['id'] : (isset($_GET['id']) ? $_GET['id'] : 0));
             $stmt = $pdo->prepare("SELECT * FROM clientes WHERE id = ?");
             $stmt->execute([$id]);
             $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -107,9 +107,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Filtros de busca e listagem
-$search = trim($_GET['search'] ?? '');
-$filterStatus = trim($_GET['status'] ?? '');
-$filterCity = trim($_GET['city'] ?? '');
+$search = trim(isset($_GET['search']) ? $_GET['search'] : '');
+$filterStatus = trim(isset($_GET['status']) ? $_GET['status'] : '');
+$filterCity = trim(isset($_GET['city']) ? $_GET['city'] : '');
 
 $query = "SELECT * FROM clientes WHERE 1=1";
 $params = [];

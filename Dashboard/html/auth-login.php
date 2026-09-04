@@ -10,8 +10,8 @@ if (isset($_SESSION['usuario_id'])) {
 $erro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $login = trim($_POST['login'] ?? $_POST['email'] ?? '');
-    $senha = $_POST['password'] ?? '';
+    $login = trim(isset($_POST['login']) ? $_POST['login'] : (isset($_POST['email']) ? $_POST['email'] : ''));
+    $senha = isset($_POST['password']) ? $_POST['password'] : '';
 
     if (empty($login) || empty($senha)) {
         $erro = 'Por favor, preencha o login e a senha.';
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['usuario_id'] = $usuario['id'];
                 $_SESSION['usuario_nome'] = $usuario['nome'];
                 $_SESSION['usuario_email'] = $usuario['email'];
-                $_SESSION['usuario_cargo'] = $usuario['cargo'] ?? 'Administrador';
+                $_SESSION['usuario_cargo'] = isset($usuario['cargo']) ? $usuario['cargo'] : 'Administrador';
 
                 header('Location: index.php');
                 exit;

@@ -4,8 +4,8 @@ if (!isset($_SESSION['usuario_id'])) {
     header('Location: auth-login.php');
     exit;
 }
-$nomeUsuario = $_SESSION['usuario_nome'] ?? 'Administrador';
-$cargoUsuario = $_SESSION['usuario_cargo'] ?? 'Administrador';
+$nomeUsuario = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : 'Administrador';
+$cargoUsuario = isset($_SESSION['usuario_cargo']) ? $_SESSION['usuario_cargo'] : 'Administrador';
 ?>
 <!DOCTYPE html>
 <!-- =========================================================
