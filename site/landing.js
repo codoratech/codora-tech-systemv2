@@ -24,7 +24,7 @@ if (typeof tailwind !== 'undefined') {
 document.addEventListener('DOMContentLoaded', function () {
   "use strict";
 
-  /* ============ i18n ============ */
+  /* ============ INTERNACIONALIZAÇÃO ============ */
   var dict = {
     pt: {
       skipLink: "Pular para o conteúdo",
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.addEventListener('click', function () { applyLang(btn.getAttribute('data-lang-btn')); });
   });
 
-  /* ============ Theme toggle ============ */
+  /* ============ ALTERNADOR DE TEMA ============ */
   var themeBtn = document.getElementById('theme-toggle');
   var sunIcon = document.getElementById('theme-icon-sun');
   var moonIcon = document.getElementById('theme-icon-moon');
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ============ Sticky nav + scroll spy ============ */
+  /* ============ NAVEGAÇÃO FIXA E RASTREAMENTO DE ROLAGEM ============ */
   var nav = document.getElementById('site-nav');
   var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id], section[id]'));
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { rootMargin: '-45% 0px -50% 0px' });
   sections.forEach(function (s) { spy.observe(s); });
 
-  /* ============ Mobile menu ============ */
+  /* ============ MENU MÓVEL ============ */
   var mobileBtn = document.getElementById('mobile-menu-btn');
   var mobileMenu = document.getElementById('mobile-menu');
   if (mobileBtn && mobileMenu) {
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ============ Reveal on scroll ============ */
+  /* ============ REVELAR AO ROLAR ============ */
   var revealItems = document.querySelectorAll('.reveal, .reveal-scale');
   var ro = new IntersectionObserver(function (entries, obs) {
     entries.forEach(function (entry) {
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { threshold: 0.15 });
   revealItems.forEach(function (el) { ro.observe(el); });
 
-  /* ============ Counters ============ */
+  /* ============ CONTADORES ============ */
   var counters = document.querySelectorAll('.counter-num');
   var counterObs = new IntersectionObserver(function (entries, obs) {
     entries.forEach(function (entry) {
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { threshold: 0.4 });
   counters.forEach(function (el) { counterObs.observe(el); });
 
-  /* ============ Portfolio filter ============ */
+  /* ============ FILTRO DE PORTFÓLIO ============ */
   var filterBtns = document.querySelectorAll('.portfolio-filter-btn');
   var portfolioItems = document.querySelectorAll('.portfolio-item');
   filterBtns.forEach(function (btn) {
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* ============ Toast ============ */
+  /* ============ NOTIFICAÇÕES (TOAST) ============ */
   var toast = document.getElementById('toast');
   var toastTimer;
   function showToast(msg) {
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function () {
     toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 4000);
   }
 
-  /* ============ Login Modal Transition ============ */
+  /* ============ TRANSIÇÃO DO MODAL DE LOGIN ============ */
   var loginOverlay = document.getElementById('login-modal-overlay');
   var loginCard = document.getElementById('login-modal-card');
   var openLoginBtn = document.getElementById('open-login-modal');
@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e.key === 'Escape') closeLoginModal();
   });
 
-  // Modal password toggle
+  // Alternar visibilidade de senha do modal
   var modalPwInput = document.getElementById('modal-login-password');
   var modalToggleBtn = document.getElementById('modal-toggle-password');
   var modalEyeOpen = document.getElementById('modal-eye-open');
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Modal form submit simulation
+  // Simulação de envio do formulário do modal
   var modalForm = document.getElementById('modal-login-form');
   var modalLoginBtn = document.getElementById('modal-login-btn');
   var modalBtnLabel = document.getElementById('modal-login-btn-label');

@@ -115,7 +115,7 @@
 
 <div class="min-h-screen flex flex-col lg:flex-row">
 
-  <!-- ============ LEFT: FORM ============ -->
+  <!-- ============ ESQUERDA: FORMULÁRIO ============ -->
   <main class="relative flex-1 flex items-center justify-center px-6 py-12 sm:px-10">
     <button type="button" id="theme-toggle" class="theme-toggle absolute top-6 right-6" aria-label="Alternar tema claro/escuro">
       <span class="knob">
@@ -125,7 +125,7 @@
     </button>
 
     <div class="w-full max-w-[380px]">
-      <!-- Logo -->
+      <!-- Logotipo -->
       <div class="fade-in flex items-center gap-2.5 font-display font-semibold text-lg mb-9" style="animation-delay:.05s">
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
           <rect x="1" y="1" width="12" height="12" rx="3" fill="var(--primary)"/>
@@ -189,7 +189,7 @@
     </div>
   </main>
 
-  <!-- ============ RIGHT: VISUAL ============ -->
+  <!-- ============ DIREITA: VISUAL ============ -->
   <aside class="visual-panel relative hidden lg:flex lg:w-[46%] items-center justify-center overflow-hidden px-14" aria-hidden="true">
     <div class="absolute inset-0 grid-overlay"></div>
     <div class="glow-orb float-a w-72 h-72 -top-10 -left-16" style="background: var(--secondary); opacity:.35;"></div>
@@ -213,7 +213,7 @@
       </g>
     </svg>
 
-    <!-- abstract "interface" card motif -->
+    <!-- motivo abstrato de cartão de interface -->
     <div class="fade-in relative z-10 w-full max-w-xs" style="animation-delay:.3s">
       <div class="rounded-2xl p-5 backdrop-blur-md" style="background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);">
         <div class="flex items-center gap-1.5 mb-4">
@@ -282,7 +282,7 @@
 
   document.getElementById('forgot-link').addEventListener('click', function (e) {
     e.preventDefault();
-    // Visual-only placeholder: no functional password recovery is implemented yet.
+    // Espaço reservado puramente visual: nenhuma recuperação de senha funcional implementada ainda.
   });
 
   var form = document.getElementById('login-form');
@@ -298,7 +298,7 @@
       spinner.classList.add('hidden');
       label.textContent = 'Entrar no painel';
       btn.disabled = false;
-      // Visual-only simulation: no request is sent and no redirect occurs.
+      // Simulação puramente visual: nenhuma requisição é enviada e nenhum redirecionamento ocorre.
     }, 1200);
   });
 })();
