@@ -1,0 +1,14 @@
+DirectoryIndex index.php
+Options -Indexes
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+# Defesa adicional caso alguém envie pastas de controle de versão por engano.
+<If "%{REQUEST_URI} =~ m#(?i)(^|/)[.](git|svn|hg)(/|$)#">
+    Require all denied
+</If>
+<FilesMatch "(?i)(^config(?:\.example)?\.php$|\.bak$|\.sql$|\.md$|\.log$|^desktop\.ini$)">
+    Require all denied
+</FilesMatch>
